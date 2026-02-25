@@ -1,0 +1,25 @@
+{
+    "name": "kennofizet/packages-core-backend",
+    "description": "Core base package for RewardPlay ecosystem — zones, servers, tokens, users",
+    "type": "library",
+    "version": "1.0.0",
+    "autoload": {
+        "psr-4": {
+            "Kennofizet\\PackagesCore\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "*",
+        "illuminate/database": "*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kennofizet\\PackagesCore\\PackagesCoreServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
