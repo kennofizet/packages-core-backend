@@ -29,41 +29,6 @@ trait UserActions
         return $this->zones()->pluck('zones.id')->toArray();
     }
 
-    /**
-     * Get the zone manager record for a given zone.
-     */
-    public function getZoneManager(int $zoneId): ?ServerManager
-    {
-        return ServerManager::where('user_id', $this->id)
-            ->where('zone_id', $zoneId)
-            ->first();
-    }
-
-    /**
-     * Get all server managers for this user.
-     */
-    public function getServerManagers()
-    {
-        return ServerManager::where('user_id', $this->id)->get();
-    }
-
-    /**
-     * Create a zone manager record.
-     */
-    public function createZoneManager(array $data): ServerManager
-    {
-        return ServerManager::create(array_merge(['user_id' => $this->id], $data));
-    }
-
-    /**
-     * Delete a zone manager record.
-     */
-    public function deleteZoneManager(array $data): bool
-    {
-        return (bool) ServerManager::where('user_id', $data['user_id'] ?? $this->id)
-            ->where('zone_id', $data['zone_id'])
-            ->delete();
-    }
 
     // ──────────────────────────────────────────────────────────────
     // RewardPlay-specific actions (guarded — only run when rewardplay is loaded)
