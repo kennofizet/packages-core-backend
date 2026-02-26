@@ -12,6 +12,7 @@ $rateLimit = config('packages-core.rate_limit', 60);
 
 // Protected routes (token required)
 Route::prefix($apiPrefix)->middleware([
+    'api',
     'throttle:' . $rateLimit . ',1',
     ValidateRewardPlayToken::class,
     ValidatorRequestMiddleware::class,
@@ -28,6 +29,7 @@ Route::prefix($apiPrefix)->middleware([
 
 // Protected routes (token + manager required)
 Route::prefix($apiPrefix)->middleware([
+    'api',
     'throttle:' . $rateLimit . ',1',
     ValidateRewardPlayToken::class,
     ValidatorRequestMiddleware::class,
