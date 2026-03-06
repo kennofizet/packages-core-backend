@@ -8,7 +8,7 @@ return new class extends Migration {
     protected function getZoneManagerTableName(): string
     {
         $prefix = config('packages-core.table_prefix', '');
-        return $prefix . 'rewardplay_zone_managers';
+        return $prefix . 'knf_core_zone_managers';
     }
 
     public function up()

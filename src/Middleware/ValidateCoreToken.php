@@ -11,7 +11,7 @@ use Kennofizet\PackagesCore\Models\Zone;
 use Kennofizet\PackagesCore\Traits\GlobalDataTrait;
 use Illuminate\Support\Facades\DB;
 
-class ValidateRewardPlayToken
+class ValidateCoreToken
 {
     use GlobalDataTrait;
 
@@ -24,10 +24,10 @@ class ValidateRewardPlayToken
 
     public function handle(Request $request, Closure $next)
     {
-        $token = $request->header('X-RewardPlay-Token');
+        $token = $request->header('X-Knf-Token');
 
         if (!$token) {
-            return $this->apiErrorResponse('RewardPlay token is required', 401);
+            return $this->apiErrorResponse('Knf token is required', 401);
         }
 
         $userId = $this->tokenService->validateToken($token);
@@ -46,19 +46,19 @@ class ValidateRewardPlayToken
         $serverId = null;
         if (!empty($serverColumn) && !empty($user->{$serverColumn})) {
             $serverId = $user->{$serverColumn};
-            $request->attributes->set('rewardplay_user_server_id', $serverId);
+            $request->attributes->set('knf_core_user_server_id', $serverId);
         }
 
         $managedZoneIds = $this->getUserManagedZoneIds($userId);
-        $request->attributes->set('rewardplay_user_managed_zone_ids', $managedZoneIds);
+        $request->attributes->set('knf_core_user_managed_zone_ids', $managedZoneIds);
 
         $zoneIds = $this->getUserZoneIds($userId);
-        $request->attributes->set('rewardplay_user_zone_ids', $zoneIds);
+        $request->attributes->set('knf_core_user_zone_ids', $zoneIds);
 
-        $request->attributes->set('rewardplay_user_id', $userId);
+        $request->attributes->set('knf_core_user_id', $userId);
 
         $managedServerId = $this->getUserManagedServerId($userId);
-        $request->attributes->set('rewardplay_user_managed_server_id', $managedServerId);
+        $request->attributes->set('knf_core_user_managed_server_id', $managedServerId);
 
         if (empty($managedZoneIds) && empty($zoneIds) && empty($managedServerId)) {
             return $this->apiErrorResponse('User not in any zone or not managing any server', 403);
@@ -69,7 +69,7 @@ class ValidateRewardPlayToken
             return $this->apiErrorResponse('Invalid or unauthorized zone_id', 403);
         }
 
-        $request->attributes->set('rewardplay_user_zone_id_current', $currentZoneId);
+        $request->attributes->set('knf_core_user_zone_id_current', $currentZoneId);
 
         $allZoneIds = array_unique(array_merge($zoneIds, $managedZoneIds));
         $validationError = $this->validateRequestPermissions($request, $managedServerId, $allZoneIds);
@@ -83,7 +83,7 @@ class ValidateRewardPlayToken
     protected function getAndValidateZoneId(Request $request, array $zoneIds, array $managedZoneIds): ?int
     {
         $allZoneIds = array_unique(array_merge($zoneIds, $managedZoneIds));
-        $requestZoneId = $request->header('X-RewardPlay-Zone-Id');
+        $requestZoneId = $request->header('X-Knf-Zone-Id');
 
         if (empty($requestZoneId)) {
             return !empty($allZoneIds) ? (int) $allZoneIds[0] : null;

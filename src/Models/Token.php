@@ -13,7 +13,7 @@ class Token extends BaseModel
 
     public function getTable()
     {
-        return self::getPivotTableName('rewardplay_tokens');
+        return self::getPivotTableName('knf_core_tokens');
     }
 
     protected $fillable = [

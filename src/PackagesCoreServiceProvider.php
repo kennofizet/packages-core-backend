@@ -3,7 +3,7 @@
 namespace Kennofizet\PackagesCore;
 
 use Illuminate\Support\ServiceProvider;
-use Kennofizet\PackagesCore\Middleware\ValidateRewardPlayToken;
+use Kennofizet\PackagesCore\Middleware\ValidateCoreToken;
 use Kennofizet\PackagesCore\Middleware\EnsureUserIsManager;
 use Kennofizet\PackagesCore\Middleware\ValidatorRequestMiddleware;
 use Kennofizet\PackagesCore\Commands\ManageCoreCommand;
@@ -38,9 +38,9 @@ class PackagesCoreServiceProvider extends ServiceProvider
 
         // Register middleware aliases
         $router = $this->app['router'];
-        $router->aliasMiddleware('rewardplay.token', ValidateRewardPlayToken::class);
-        $router->aliasMiddleware('rewardplay.manager', EnsureUserIsManager::class);
-        $router->aliasMiddleware('rewardplay.validator', ValidatorRequestMiddleware::class);
+        $router->aliasMiddleware('knf.core.token', ValidateCoreToken::class);
+        $router->aliasMiddleware('knf.core.manager', EnsureUserIsManager::class);
+        $router->aliasMiddleware('knf.core.validator', ValidatorRequestMiddleware::class);
 
         // Register core commands
         if ($this->app->runningInConsole()) {

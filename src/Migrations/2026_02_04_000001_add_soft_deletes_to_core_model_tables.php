@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Schema;
  *
  * Covers:
  *   - Core models  : Zone, Token, ServerManager  (Kennofizet\PackagesCore\*)
- *   - RewardPlay models : SettingEvent, SettingShopItem, UserProfile, etc.  (Kennofizet\RewardPlay\*)
  *
  * Excluded:
  *   - User  (extends vanilla Model, no SoftDeletes)

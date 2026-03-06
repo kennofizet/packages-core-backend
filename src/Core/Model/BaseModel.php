@@ -59,7 +59,7 @@ class BaseModel extends Model
 
             if (self::tableHasColumn($table, CoreConstant::ZONE_ID_COLUMN)) {
                 if (empty($model->zone_id) && request()) {
-                    $currentZoneId = request()->attributes->get('rewardplay_user_zone_id_current');
+                    $currentZoneId = request()->attributes->get('knf_core_user_zone_id_current');
                     if (!empty($currentZoneId)) {
                         $model->zone_id = $currentZoneId;
                     }

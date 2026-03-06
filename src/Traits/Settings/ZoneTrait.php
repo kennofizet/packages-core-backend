@@ -1,6 +1,6 @@
 <?php
 
-namespace Kennofizet\PackagesCore\Traits\SettingRewardPlay;
+namespace Kennofizet\PackagesCore\Traits\Settings;
 
 use Kennofizet\PackagesCore\Services\ZoneService;
 

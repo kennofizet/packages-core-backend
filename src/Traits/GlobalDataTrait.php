@@ -23,7 +23,7 @@ trait GlobalDataTrait
     }
 
     /**
-     * Basic image URL builder (no rewardplay-specific config)
+     * Basic image URL builder (no specific config)
      */
     public function getImageFullUrl(?string $imagePath): string
     {

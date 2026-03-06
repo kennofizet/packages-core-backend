@@ -1,6 +1,6 @@
 {
     "name": "kennofizet/packages-core-backend",
-    "description": "Core base package for RewardPlay ecosystem — zones, servers, tokens, users",
+    "description": "Core base package for ecosystem — zones, servers, tokens, users",
     "type": "library",
     "version": "1.0.0",
     "autoload": {

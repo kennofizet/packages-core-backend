@@ -19,7 +19,7 @@ trait BaseModelActions
      */
     public static function currentUserZoneIds()
     {
-        $zoneIds = request()->attributes->get('rewardplay_user_zone_ids', []);
+        $zoneIds = request()->attributes->get('knf_core_user_zone_ids', []);
         if (!is_array($zoneIds)) {
             return [];
         }
@@ -30,7 +30,7 @@ trait BaseModelActions
 
     public static function currentUserZoneId()
     {
-        $zoneId = request()->attributes->get('rewardplay_user_zone_id_current');
+        $zoneId = request()->attributes->get('knf_core_user_zone_id_current');
         if (empty($zoneId)) {
             return null;
         }
@@ -42,7 +42,7 @@ trait BaseModelActions
      */
     public static function currentUserManagedZoneIds()
     {
-        $zoneIds = request()->attributes->get('rewardplay_user_managed_zone_ids', []);
+        $zoneIds = request()->attributes->get('knf_core_user_managed_zone_ids', []);
         if (!is_array($zoneIds)) {
             return [];
         }
@@ -61,7 +61,7 @@ trait BaseModelActions
             return null;
         }
 
-        $serverId = request()->attributes->get('rewardplay_user_server_id');
+        $serverId = request()->attributes->get('knf_core_user_server_id');
         if (empty($serverId)) {
             return null;
         }
@@ -73,7 +73,7 @@ trait BaseModelActions
      */
     public static function currentUserManagedServerId(): ?int
     {
-        return request()->attributes->get('rewardplay_user_managed_server_id');
+        return request()->attributes->get('knf_core_user_managed_server_id');
     }
 
     /**

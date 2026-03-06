@@ -15,7 +15,7 @@ class ZoneUser extends Pivot
 
     public function getTable()
     {
-        return self::getPivotTableName('rewardplay_zone_users');
+        return self::getPivotTableName('knf_core_zone_users');
     }
 
     protected $fillable = [

@@ -13,7 +13,7 @@ class Zone extends BaseModel
 
     public function getTable()
     {
-        return self::getPivotTableName('rewardplay_zones');
+        return self::getPivotTableName('knf_core_zones');
     }
 
     protected $fillable = [

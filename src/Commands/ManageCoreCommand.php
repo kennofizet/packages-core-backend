@@ -11,7 +11,6 @@ use Kennofizet\PackagesCore\Traits\GlobalDataTrait;
  * ManageCoreCommand — full CRUD for Zones and ServerManagers
  *
  * This command handles Create / Edit / Delete operations.
- * Use 'rewardplay:manage' for read-only listing within rewardplay context.
  */
 class ManageCoreCommand extends Command
 {

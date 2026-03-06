@@ -4,12 +4,12 @@ namespace Kennofizet\PackagesCore\Traits;
 
 use Kennofizet\PackagesCore\Services\TokenService;
 
-trait HasRewardPlayToken
+trait HasKnfCoreToken
 {
     /**
-     * Get RewardPlay token for this user — creates one if it doesn't exist.
+     * Get KnfCore token for this user — creates one if it doesn't exist.
      */
-    public function getRewardplayToken(): ?string
+    public function getKnfCoreToken(): ?string
     {
         $tokenService = app(TokenService::class);
         $token = $tokenService->getToken($this->id);
@@ -22,9 +22,9 @@ trait HasRewardPlayToken
     }
 
     /**
-     * Refresh RewardPlay token for this user.
+     * Refresh KnfCore token for this user.
      */
-    public function refreshRewardplayToken(): string
+    public function refreshKnfCoreToken(): string
     {
         return app(TokenService::class)->createOrRefreshToken($this->id);
     }
