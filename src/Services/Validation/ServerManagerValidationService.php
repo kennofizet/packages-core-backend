@@ -14,8 +14,10 @@ class ServerManagerValidationService
      */
     public function validateAssign(array $data): void
     {
+        $userTable = config('packages-core.table_user', 'users');
+
         $validator = Validator::make($data, [
-            'user_id' => 'required|integer',
+            'user_id' => ['required', 'integer', "exists:{$userTable},id"],
             'server_id' => 'nullable|integer',
         ]);
 
