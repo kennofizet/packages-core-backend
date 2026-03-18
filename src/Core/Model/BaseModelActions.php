@@ -98,6 +98,30 @@ trait BaseModelActions
     }
 
     /**
+     * Whether the current user is a manager (server manager or has managed zones).
+     */
+    public static function isManager(): bool
+    {
+        $managedServerId = self::currentUserManagedServerId();
+        if ($managedServerId !== null) {
+            return true;
+        }
+        $managedZoneIds = self::currentUserManagedZoneIds();
+        return !empty($managedZoneIds);
+    }
+
+    /**
+     * Whether the current user can manage the given zone (server manager or zone in managed list).
+     */
+    public static function canManageZoneOrServer(int $zoneId): bool
+    {
+        if (self::currentUserManagedServerId() !== null) {
+            return true;
+        }
+        return self::canManageZone($zoneId);
+    }
+
+    /**
      * Get pivot table name with configured prefix.
      */
     protected static function getPivotTableName(string $tableName): string

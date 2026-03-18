@@ -32,6 +32,7 @@ class ZoneController
             return $this->apiResponseWithContext('Success', [
                 'zones' => [],
                 'timezone' => $timezone,
+                'is_manager' => self::isManager(),
             ]);
         }
 
@@ -43,6 +44,7 @@ class ZoneController
         return $this->apiResponseWithContext('Success', [
             'zones' => $zones,
             'timezone' => $timezone,
+            'is_manager' => self::isManager(),
         ]);
     }
 
