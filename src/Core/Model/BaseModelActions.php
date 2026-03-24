@@ -15,6 +15,18 @@ trait BaseModelActions
     }
 
     /**
+     * Get current user ID from request attributes
+     */
+    public static function currentUserId()
+    {
+        $userId = request()->attributes->get('knf_core_user_id');
+        if (empty($userId)) {
+            return null;
+        }
+        return (int) $userId;
+    }
+
+    /**
      * Get array of zone IDs that the current user is in
      */
     public static function currentUserZoneIds()

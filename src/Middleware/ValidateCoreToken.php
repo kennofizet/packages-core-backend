@@ -129,8 +129,7 @@ class ValidateCoreToken
 
     protected function resolveUserWithServer(int $userId, ?string $serverColumn = null)
     {
-        $tableUser = (new \Kennofizet\PackagesCore\Models\User())->getTable();
-        $user = DB::table($tableUser)->where('id', $userId)->first();
+        $user = \Kennofizet\PackagesCore\Models\User::byId($userId)->first();
 
         if (empty($user)) {
             return null;
