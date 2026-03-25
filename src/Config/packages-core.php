@@ -12,6 +12,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | User Display Name Column
+    |--------------------------------------------------------------------------
+    | Column on the users table used as the "display name" in APIs/UI.
+    | Example: 'name', 'username', 'full_name'
+    | Default: null — do not include/display a name unless the host app does it
+    */
+    'user_col_name' => env('KNF_CORE_USER_COL_NAME', 'name'),
+
+    /*
+    |--------------------------------------------------------------------------
     | User Server ID Column
     |--------------------------------------------------------------------------
     | The name of the column on the users table that stores the server ID.
