@@ -8,6 +8,7 @@ class Constant
     const STATUS_OFF = 0;
 
     const ZONE_ID_COLUMN = 'zone_id';
+    const SEASON_ID_COLUMN = 'season_id';
     const SERVER_ID_COLUMN = 'server_id';
     const IS_DELETED_STATUS_COLUMN = 'is_deleted_status';
     const STATUS_COLUMN = 'status';

@@ -22,6 +22,33 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Season Table Name
+    |--------------------------------------------------------------------------
+    | Shared season table used by all packages that need season-scoped data.
+    | The real table name is prefixed by KNF_CORE_TABLE_PREFIX in the model.
+    */
+    'season_table' => env('KNF_CORE_SEASON_TABLE', 'knf_core_seasons'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Event fired when a season is created
+    |--------------------------------------------------------------------------
+    */
+    'season_event_class' => \Kennofizet\PackagesCore\Events\SeasonCreated::class,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Listeners called after a season is created
+    |--------------------------------------------------------------------------
+    | Each class must implement Kennofizet\PackagesCore\Contracts\AfterSeasonCreatedListener
+    | and expose handle(Season $season): void.
+    */
+    'after_season_created_listeners' => [
+        // \App\Listeners\AfterSeasonCreated::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | User Server ID Column
     |--------------------------------------------------------------------------
     | The name of the column on the users table that stores the server ID.

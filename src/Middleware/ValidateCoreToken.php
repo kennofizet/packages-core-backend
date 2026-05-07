@@ -8,18 +8,20 @@ use Kennofizet\PackagesCore\Services\TokenService;
 use Kennofizet\PackagesCore\Models\ZoneUser;
 use Kennofizet\PackagesCore\Models\ServerManager;
 use Kennofizet\PackagesCore\Models\Zone;
+use Kennofizet\PackagesCore\Services\SeasonService;
 use Kennofizet\PackagesCore\Traits\GlobalDataTrait;
-use Illuminate\Support\Facades\DB;
 
 class ValidateCoreToken
 {
     use GlobalDataTrait;
 
     protected $tokenService;
+    protected $seasonService;
 
-    public function __construct(TokenService $tokenService)
+    public function __construct(TokenService $tokenService, SeasonService $seasonService)
     {
         $this->tokenService = $tokenService;
+        $this->seasonService = $seasonService;
     }
 
     public function handle(Request $request, Closure $next)
@@ -71,6 +73,12 @@ class ValidateCoreToken
 
         $request->attributes->set('knf_core_user_zone_id_current', $currentZoneId);
 
+        $currentSeasonId = $this->resolveSeasonId($request, $currentZoneId);
+        if ($currentSeasonId === false) {
+            return $this->apiErrorResponse('Invalid season_id for current zone', 403);
+        }
+        $request->attributes->set('knf_core_user_season_id_current', $currentSeasonId);
+
         $allZoneIds = array_unique(array_merge($zoneIds, $managedZoneIds));
         $validationError = $this->validateRequestPermissions($request, $managedServerId, $allZoneIds);
         if ($validationError) {
@@ -78,6 +86,15 @@ class ValidateCoreToken
         }
 
         return $next($request);
+    }
+
+    protected function resolveSeasonId(Request $request, ?int $currentZoneId)
+    {
+        if (empty($currentZoneId)) {
+            return null;
+        }
+
+        return $this->seasonService->getActiveSeasonIdForZone((int) $currentZoneId);
     }
 
     protected function getAndValidateZoneId(Request $request, array $zoneIds, array $managedZoneIds): ?int

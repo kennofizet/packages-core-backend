@@ -26,6 +26,19 @@ trait BaseModelScopes
         });
     }
 
+    public function scopeInSeason(Builder $query)
+    {
+        $seasonId = BaseModelActions::currentUserSeasonId();
+        if (empty($seasonId)) {
+            return $query;
+        }
+
+        $table = $query->getModel()->getTable();
+        return $query->where(function ($q) use ($table, $seasonId) {
+            $q->where($table . '.' . CoreConstant::SEASON_ID_COLUMN, $seasonId);
+        });
+    }
+
     public function scopeWithoutDeleteStatus(Builder $query)
     {
         $table = $query->getModel()->getTable();

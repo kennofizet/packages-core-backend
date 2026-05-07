@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Kennofizet\PackagesCore\Controllers\AuthController;
+use Kennofizet\PackagesCore\Controllers\SeasonController;
 use Kennofizet\PackagesCore\Controllers\ZoneController;
 use Kennofizet\PackagesCore\Middleware\ValidateCoreToken;
 use Kennofizet\PackagesCore\Middleware\ValidatorRequestMiddleware;
@@ -46,4 +47,9 @@ Route::prefix($apiPrefix)->middleware([
     Route::get('/zones/{id}/users', [ZoneController::class, 'users']);
     Route::post('/zones/{id}/users', [ZoneController::class, 'assignUser']);
     Route::delete('/zones/{id}/users/{userId}', [ZoneController::class, 'removeUser']);
+
+    // Season management
+    Route::get('/seasons', [SeasonController::class, 'index']);
+    Route::post('/seasons', [SeasonController::class, 'store']);
+    Route::post('/seasons/{seasonId}/activate', [SeasonController::class, 'activate']);
 });

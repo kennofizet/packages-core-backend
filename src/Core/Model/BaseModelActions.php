@@ -50,6 +50,18 @@ trait BaseModelActions
     }
 
     /**
+     * Get current season ID from request attributes.
+     */
+    public static function currentUserSeasonId()
+    {
+        $seasonId = request()->attributes->get('knf_core_user_season_id_current');
+        if (empty($seasonId)) {
+            return null;
+        }
+        return (int) $seasonId;
+    }
+
+    /**
      * Get array of zone IDs that the current user manages
      */
     public static function currentUserManagedZoneIds()

@@ -38,6 +38,16 @@ class BaseModel extends Model
             }
         });
 
+        // Apply global scope for season filtering (when model has season_id).
+        static::addGlobalScope('in_season', function (Builder $builder) {
+            $table = $builder->getModel()->getTable();
+            $array_skips = [];
+
+            if (self::tableHasColumn($table, CoreConstant::SEASON_ID_COLUMN) && !in_array($table, $array_skips)) {
+                $builder->inSeason();
+            }
+        });
+
         // Global delete_status scope
         static::addGlobalScope('without_delete_status', function (Builder $builder) {
             try {
@@ -62,6 +72,15 @@ class BaseModel extends Model
                     $currentZoneId = request()->attributes->get('knf_core_user_zone_id_current');
                     if (!empty($currentZoneId)) {
                         $model->zone_id = $currentZoneId;
+                    }
+                }
+            }
+
+            if (self::tableHasColumn($table, CoreConstant::SEASON_ID_COLUMN)) {
+                if (empty($model->season_id) && request()) {
+                    $currentSeasonId = request()->attributes->get('knf_core_user_season_id_current');
+                    if (!empty($currentSeasonId)) {
+                        $model->season_id = $currentSeasonId;
                     }
                 }
             }
